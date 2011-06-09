@@ -1,0 +1,33 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  routing_number: MyString
+  office_code: MyString
+  servicing_frb_number: MyString
+  record_type_code: MyString
+  change_date: 2011-06-09
+  new_routing_number: MyString
+  customer_name: MyString
+  address: MyString
+  city: MyString
+  state: MyString
+  zipcode: MyString
+  telephone: MyString
+  status_code: MyString
+  data_view_code: MyString
+
+two:
+  routing_number: MyString
+  office_code: MyString
+  servicing_frb_number: MyString
+  record_type_code: MyString
+  change_date: 2011-06-09
+  new_routing_number: MyString
+  customer_name: MyString
+  address: MyString
+  city: MyString
+  state: MyString
+  zipcode: MyString
+  telephone: MyString
+  status_code: MyString
+  data_view_code: MyString
