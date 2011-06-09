@@ -33,6 +33,16 @@ class InstitutionTest < ActiveSupport::TestCase
     end
   end
   
+  test "Institution#populate_database should update records if called with :update => true" do
+    assert_equal @test.routing_number,"086300012"
+    stub_request(:get, "http://www.fededirectory.frb.org/FedACHdir.txt").
+      with(:headers => {'Accept'=>'*/*', 'User-Agent'=>'Ruby'}).
+      to_return(:status => 200, :body => "086300012O0810000452060911999999999OLD NATL BK IN EVANSVILLE           ATTN: DENISE ATKINS                 EVANSVILLE          IN477080000812468109111     \r\n086300025O0810000451012501000000000INTEGRA BANK                        P.O. BOX 868                        EVANSVILLE          IN477050868812464963511     ", :headers => {})
+    Institution.populate_database(:update => true)
+    @test = Institution.where(:routing_number => "086300012").first
+    assert_equal @test.routing_number, "999999999"
+  end
+  
   test "Institution#populate_database should populate the database with the correct data" do
     assert_equal @test.routing_number, "086300012"
     assert_equal @test.office_code, "O"
@@ -51,15 +61,15 @@ class InstitutionTest < ActiveSupport::TestCase
   end
   
   test "Institution#record_type should return 'Institution is a Federal Reserve Bank' and #federal_reserve_bank? should be true if #record_type_code is 0" do
-    @test.record_type_code = 0
+    @test.record_type_code = 0.to_s
     assert_equal @test.record_type, 'Institution is a Federal Reserve Bank'
     assert @test.federal_reserve_bank?
   end
   
   test "Institutiton#routing_number should return the stored routing number if record_type_code is not 2" do
-    @test.record_type_code = 1
+    @test.record_type_code = 1.to_s
     assert_equal @test.routing_number, "086300012"
-    @test.record_type_code = 2
+    @test.record_type_code = 2.to_s
     assert_equal @test.routing_number, "000000000"
   end
   
