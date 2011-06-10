@@ -24,3 +24,12 @@ Run the unit tests with these commands:
 
     $ bundle exec ruby -Itest test/unit/ach_test.rb
     $ bundle exec ruby -Itest test/unit/institution_test.rb
+    
+You can always launch the server and see the app
+in action. If this were going into production, the
+populating code would be offloaded to a background process.
+Start the server 
+
+    $ bundle exec rails server
+    
+And pull up the website in your browser at _http://localhost:3000_.
